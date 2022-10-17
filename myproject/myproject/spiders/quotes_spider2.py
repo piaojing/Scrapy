@@ -2,7 +2,7 @@ import scrapy
 
 
 class QuotesSpider(scrapy.Spider):
-    name = "nhs-condition"
+    name = "nhs-med"
     start_urls=['https://www.nhs.uk/medicines/']
     
     def parse(self, response):
