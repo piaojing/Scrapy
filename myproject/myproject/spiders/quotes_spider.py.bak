@@ -1,0 +1,23 @@
+import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = "nhs-condition"
+    start_urls=['https://www.nhs.uk/conditions/']
+
+    def parse(self, response):
+        first_ul=response.css('ul.nhsuk-list.nhsuk-list--border')
+        a_li=first_ul[0].css('a')
+        try:
+            for t in a_li: # t is List
+                yield {
+                    'link': t.css('a').attrib['href']
+                }
+        except:
+            print('Error !!!!!!!')
+
+# scrapy crawl nhs-condition -O quotes.json
+
+# run file directly
+# goto project directory and run below cmd
+# scrapy runspider nhs.py -o nhs.jl
